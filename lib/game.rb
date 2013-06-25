@@ -10,7 +10,7 @@ class Game < Gosu::Window
 
   def initialize
     super 1024, 768, false
-    self.caption = "Seek and Arrive"
+    self.caption = "Wolfenstein"
     @target = ControllableCharacter.new(Target.new(10, 10), self, 'assets/target.gif')
     @character1 = AICharacter.new(Character.new(500, 500), self, 'assets/character.gif')
     @game_state = :game_started
