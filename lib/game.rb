@@ -2,8 +2,6 @@ require 'gosu'
 require_relative "drawable_character"
 require_relative "controllable_character"
 require_relative "ai_character"
-require_relative "target"
-require_relative "character"
 require_relative "event_handler"
 
 class Game < Gosu::Window
@@ -11,24 +9,27 @@ class Game < Gosu::Window
   def initialize
     super 1024, 768, false
     self.caption = "Wolfenstein"
-    @target = ControllableCharacter.new(Target.new(10, 10), self, 'assets/target.gif')
-    @character1 = AICharacter.new(Character.new(500, 500), self, 'assets/character.gif')
+    @target = ControllableCharacter.new(self, 'assets/character_sprite_sheet.png', 10, 10)
+    @character1 = AICharacter.new(self, 'assets/character_sprite_sheet.png', 500, 500)
     @game_state = :game_started
   end
 
   def manage_ai_characters
-    @character1.seek_and_arrive(@target.character)
+    @character1.seek_and_arrive(@target)
   end
 
   def manage_controllable_character
-    if button_down? Gosu::KbLeft or button_down? Gosu::GpLeft then
+    if button_down? Gosu::KbLeft or button_down? Gosu::GpLeft 
       @target.move :left
     end
-    if button_down? Gosu::KbRight or button_down? Gosu::GpRight then
+    if button_down? Gosu::KbRight or button_down? Gosu::GpRight 
       @target.move :right
     end
-    if button_down? Gosu::KbUp or button_down? Gosu::GpButton0 then
+    if button_down? Gosu::KbUp or button_down? Gosu::GpButton0 
       @target.move :front
+    end
+    if !(button_down? Gosu::KbUp or button_down? Gosu::GpButton0) and !(button_down? Gosu::KbRight or button_down? Gosu::GpRight) and !(button_down? Gosu::KbLeft or button_down? Gosu::GpLeft)
+      @target.not_moving
     end
   end
 

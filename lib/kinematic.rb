@@ -1,7 +1,7 @@
 require "matrix"
 module Kinematic
   attr_accessor :velocity, :orientation, :position, :max_speed, :time_update
-  def initialize(position_x,position_y)
+  def init_kinematic(position_x,position_y)
     @velocity = Vector[5,5]
     @orientation = @velocity.normalize
     @position = Vector[position_x,position_y]
