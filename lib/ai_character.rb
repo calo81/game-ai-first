@@ -13,4 +13,7 @@ class AICharacter < DrawableCharacter
     @velocity *= @max_speed
     @orientation = @velocity.normalize
   end
+  
+  def avoid_obstacles
+  end
 end

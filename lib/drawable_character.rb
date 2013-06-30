@@ -29,8 +29,21 @@ class DrawableCharacter
   end
 
   def draw
+    establish_character_draw_direction
+    @current_frame_count += 1
+    @current_frame_count = 0 if @current_frame_count > @frames_to_update_sprite
+    image = @sprite_sheet[@last_sprite_index + 6*@last_sprite_direction]
+    if (moving and @current_frame_count == @frames_to_update_sprite)
+      @last_sprite_index += 1
+      @last_sprite_index = 0 if @last_sprite_index > @max_sprite_x
+    end
+    image.draw_rot(position[0], position[1], 1, orientation_in_radians)
+  end
+  
+  private
+  
+  def establish_character_draw_direction
     absolute_orientation = orientation_in_radians.abs
-    puts orientation_in_radians
     if (orientation_in_radians < (-1.14) and orientation_in_radians > (-1.9))
       @last_sprite_direction = Direction::RIGHT
     elsif (absolute_orientation > (0.18) and absolute_orientation < (0.31))
@@ -48,14 +61,5 @@ class DrawableCharacter
     elsif ((orientation_in_radians < (0.18) and orientation_in_radians > (-1.14)))
       @last_sprite_direction = Direction::DOWN_RIGHT
     end
-
-    @current_frame_count += 1
-    @current_frame_count = 0 if @current_frame_count > @frames_to_update_sprite
-    image = @sprite_sheet[@last_sprite_index + 6*@last_sprite_direction]
-    if (moving and @current_frame_count == @frames_to_update_sprite)
-      @last_sprite_index += 1
-      @last_sprite_index = 0 if @last_sprite_index > @max_sprite_x
-    end
-    image.draw_rot(position[0], position[1], 1, orientation_in_radians)
   end
 end

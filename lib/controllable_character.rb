@@ -2,11 +2,14 @@ require "#{__FILE__}/../drawable_character"
 class ControllableCharacter < DrawableCharacter
     
   def radius
-     50
+    50
   end
 
   def move_ahead
-    @position = @position + (@velocity*@time_update)
+    new_position =  @position + (@velocity*@time_update)
+    unless position_blocked?(new_position)
+      @position = new_position
+    end
   end
   
   def move(side)
@@ -25,8 +28,8 @@ class ControllableCharacter < DrawableCharacter
       sin_radians = Math::sin 0.1
       cos_radians = Math::cos 0.1
     else
-     sin_radians = Math::sin -0.1
-     cos_radians = Math::cos -0.1
+      sin_radians = Math::sin -0.1
+      cos_radians = Math::cos -0.1
     end
     velocity_x = velocity[0]*cos_radians - velocity[1]*sin_radians
     velocity_y = velocity[0]*sin_radians + velocity[1]*cos_radians

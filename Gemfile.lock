@@ -12,6 +12,8 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     safe_yaml (0.9.3)
+    texplay (0.4.3)
+      gosu (>= 0.7.25)
 
 PLATFORMS
   ruby
@@ -19,3 +21,4 @@ PLATFORMS
 DEPENDENCIES
   chingu
   gosu
+  texplay

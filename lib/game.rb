@@ -1,7 +1,10 @@
 require 'gosu'
+require 'texplay'
 require_relative "drawable_character"
 require_relative "controllable_character"
 require_relative "ai_character"
+require_relative "line_point"
+require_relative "wall"
 require_relative "event_handler"
 
 class Game < Gosu::Window
@@ -12,6 +15,12 @@ class Game < Gosu::Window
     @target = ControllableCharacter.new(self, 'assets/character_sprite_sheet.png', 10, 10)
     @character1 = AICharacter.new(self, 'assets/character_sprite_sheet.png', 500, 500)
     @game_state = :game_started
+    @walls = Wall.new(self, 
+      [Line.new(Point.new(0,0),Point.new(1022,0)),
+       Line.new(Point.new(0,0),Point.new(0,768)),
+       Line.new(Point.new(1022,0),Point.new(1022,768)),
+       Line.new(Point.new(0,768),Point.new(1022,768))],
+    )   
   end
 
   def manage_ai_characters
@@ -53,6 +62,7 @@ class Game < Gosu::Window
     if @game_state != :game_over
       @target.draw
       @character1.draw
+      @walls.draw
     else
       Gosu::Image.new(self, "assets/game_over.gif", true).draw(0, 0, 0);
     end
