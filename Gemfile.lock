@@ -1,6 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (3.2.13)
+      i18n (= 0.6.1)
+      multi_json (~> 1.0)
     chingu (0.8.1)
       crack
       gosu (>= 0.7.25)
@@ -8,9 +11,15 @@ GEM
     crack (0.4.0)
       safe_yaml (~> 0.9.0)
     gosu (0.7.47.1)
+    i18n (0.6.1)
+    memoist (0.9.0)
     mime-types (1.23)
+    multi_json (1.7.6)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    ruby-geometry (0.0.4)
+      activesupport
+      memoist
     safe_yaml (0.9.3)
     texplay (0.4.3)
       gosu (>= 0.7.25)
@@ -21,4 +30,5 @@ PLATFORMS
 DEPENDENCIES
   chingu
   gosu
+  ruby-geometry
   texplay

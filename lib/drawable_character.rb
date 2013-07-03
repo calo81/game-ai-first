@@ -18,14 +18,15 @@ class DrawableCharacter
   
 
   def initialize(window, character_img, position_x, position_y)
-    init_kinematic(position_x, position_y)
+    init_kinematic(window, position_x, position_y)
     @sprite_sheet = Gosu::Image::load_tiles(window, character_img, 32, 32, false)
     @last_sprite_index = 0
     @max_sprite_x = 5
     @max_sprite_y = 7
-    @frames_to_update_sprite = 10
+    @frames_to_update_sprite = 2
     @current_frame_count = 0
     @last_sprite_direction = 0
+    @window = window
   end
 
   def draw

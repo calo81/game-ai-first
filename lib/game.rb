@@ -8,19 +8,23 @@ require_relative "wall"
 require_relative "event_handler"
 
 class Game < Gosu::Window
+  
+  attr_reader :walls
 
   def initialize
     super 1024, 768, false
     self.caption = "Wolfenstein"
-    @target = ControllableCharacter.new(self, 'assets/character_sprite_sheet.png', 10, 10)
-    @character1 = AICharacter.new(self, 'assets/character_sprite_sheet.png', 500, 500)
-    @game_state = :game_started
     @walls = Wall.new(self, 
       [Line.new(Point.new(0,0),Point.new(1022,0)),
        Line.new(Point.new(0,0),Point.new(0,768)),
        Line.new(Point.new(1022,0),Point.new(1022,768)),
-       Line.new(Point.new(0,768),Point.new(1022,768))],
-    )   
+       Line.new(Point.new(0,768),Point.new(1022,768)),
+       Line.new(Point.new(300,0),Point.new(300,768))],
+    ) 
+    @target = ControllableCharacter.new(self, 'assets/character_sprite_sheet.png', 10, 10)
+    @character1 = AICharacter.new(self, 'assets/character_sprite_sheet.png', 500, 500)
+    @game_state = :game_started
+     
   end
 
   def manage_ai_characters

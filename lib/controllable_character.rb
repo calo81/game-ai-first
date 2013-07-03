@@ -36,4 +36,9 @@ class ControllableCharacter < DrawableCharacter
     @velocity = Vector[velocity_x,velocity_y]
     @velocity = velocity.normalize * (max_speed+1)
   end
+  
+  def position_blocked?(position)
+    return @window.walls.is_wall_here?(position)
+  end
+  
 end
