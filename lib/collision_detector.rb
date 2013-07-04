@@ -21,11 +21,9 @@ class CollisionDetector
       segment2 = Geometry::Segment.new_by_arrays([line.from.x, line.from.y], [line.to.x, line.to.y])
       begin
         point_collision = segment1.intersection_point_with(segment2)
-        perpendicular_vector = Vector[-(line.to.x - line.from.x), (line.to.y - line.from.y)]
-        puts "COLLISION DETECTED"
-        return Collision.new(Vector[point_collision.x,point_collision.y], perpendicular_vector.normalize)
+        perpendicular_vector = Vector[(line.to.y - line.from.y), -(line.to.x - line.from.x)]
+        return Collision.new(Vector[point_collision.x,point_collision.y], perpendicular_vector)
       rescue Geometry::SegmentsDoNotIntersect
-        puts "no collition"
       end
     end
     nil
